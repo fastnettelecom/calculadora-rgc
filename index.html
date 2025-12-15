@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<div style="width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0;">
-<div style="background: linear-gradient(90deg, #dd3627, #c22227); padding: 20px; text-align: center;"><img alt="Logo Fastnet Telecom" src="https://lh3.googleusercontent.com/d/1uD19Ne-GTmhgBC0swzwyOSZ30mmmflCS" style="max-width: 150px; text-align: left;" /></div>
-  <head>
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora de Desconto Proporcional – RGC</title>
 </head>
 <body>
+
+<div class="page-wrapper">
+  <div class="header">
+    <img alt="Logo Fastnet Telecom" src="https://lh3.googleusercontent.com/d/1uD19Ne-GTmhgBC0swzwyOSZ30mmmflCS" />
+  </div>
 
   <div class="card">
     <h1>Calculadora de Desconto Proporcional – RGC</h1>
@@ -85,97 +88,73 @@ No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-B
   </script>
 
 <style>
-  /* ===== CSS PARA USO NO GLIDE.APP (RESPONSIVO) ===== */
-  :root {
-    --primary: #d32f2f;
-    --primary-dark: #b71c1c;
-    --bg: #f4f6f8;
-    --card-bg: #ffffff;
-    --text-main: #333333;
-    --text-muted: #6f6f6f;
-    --border: #dddddd;
-    --radius: 12px;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
+  /* ===== BASE ===== */
+  * { box-sizing: border-box; }
 
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
+    background: #f4f6f8;
     padding: 12px;
-    color: var(--text-main);
+    color: #333;
   }
 
-  img {
-    max-width: 100%;
+  .page-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* empilha header e card */
+    align-items: center;
+  }
+
+  .header {
+    width: 100%;
+    max-width: 600px;
+    background: linear-gradient(90deg, #dd3627, #c22227);
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .header img {
+    max-width: 150px;
+    width: 100%;
     height: auto;
   }
 
   .card {
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
-    background: var(--card-bg);
+    background: #ffffff;
     padding: 16px;
-    border-radius: var(--radius);
+    border-radius: 0 0 12px 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   }
 
   h1 {
     font-size: 18px;
-    margin: 0 0 8px 0;
-    font-weight: 600;
+    margin-bottom: 8px;
   }
 
-  p {
+  p, label {
     font-size: 13px;
-    line-height: 1.4;
-    color: var(--text-muted);
-    margin: 6px 0;
   }
 
-  label {
-    display: block;
-    margin-top: 14px;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  input,
-  textarea {
+  input, textarea, button {
     width: 100%;
     margin-top: 6px;
     padding: 12px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
     font-size: 14px;
-    background: #fff;
-  }
-
-  input:focus,
-  textarea:focus {
-    outline: none;
-    border-color: var(--primary);
+    border-radius: 10px;
+    border: 1px solid #ddd;
   }
 
   button {
     margin-top: 18px;
-    width: 100%;
-    padding: 16px;
-    background: var(--primary);
-    color: #ffffff;
+    background: #d32f2f;
+    color: #fff;
     border: none;
-    border-radius: 14px;
-    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-  }
-
-  button:active {
-    background: var(--primary-dark);
   }
 
   .resultado {
@@ -183,39 +162,28 @@ No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-B
     background: #fafafa;
     padding: 14px;
     border-radius: 10px;
-    border: 1px solid var(--border);
-    font-size: 13px;
-  }
-
-  .resultado p {
-    margin: 4px 0;
-    color: var(--text-main);
+    border: 1px solid #ddd;
   }
 
   .obs {
     margin-top: 12px;
     font-size: 11px;
-    color: #8a8a8a;
-    line-height: 1.4;
+    color: #777;
   }
 
-  /* ===== AJUSTES PARA TELAS MAIORES ===== */
+  /* ===== TELAS MAIORES ===== */
   @media (min-width: 768px) {
-    body {
-      padding: 24px;
-    }
+    body { padding: 24px; }
+    h1 { font-size: 20px; }
+    p, label { font-size: 14px; }
 
-    h1 {
-      font-size: 20px;
+    /* mantém layout em coluna também no desktop */
+    .page-wrapper {
+      flex-direction: column;
     }
-
-    p, label {
-      font-size: 14px;
-    }
-
-    button {
-      font-size: 16px;
-    }
+  }
+    h1 { font-size: 20px; }
+    p, label { font-size: 14px; }
   }
 </style>
 
