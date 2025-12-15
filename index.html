@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<div style="width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0;">
+<div style="background: linear-gradient(90deg, #dd3627, #c22227); padding: 20px; text-align: center;"><img alt="Logo Fastnet Telecom" src="https://lh3.googleusercontent.com/d/1uD19Ne-GTmhgBC0swzwyOSZ30mmmflCS" style="max-width: 150px; text-align: left;" /></div>
+  <head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Desconto Proporcional – RGC</title>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Calculadora de Desconto Proporcional – RGC</h1>
+    <p>Calcula o abatimento proporcional quando há interrupção do serviço, conforme o princípio do RGC: pagamento apenas pelo período efetivamente utilizado.</p>
+
+    <label for="valorPlano">Valor mensal do plano (R$)</label>
+    <input type="number" id="valorPlano" placeholder="Ex: 120" step="0.01">
+    <p style="font-size:12px;color:#777;margin-top:5px;">ℹ️ Informe apenas o valor referente ao serviço de internet (SCM) descrito no contrato. Em planos combo, outros produtos (TV, apps, benefícios) não entram no cálculo, pois permaneceram disponíveis.</p>
+
+    <label for="inicio">Início da indisponibilidade</label>
+    <input type="datetime-local" id="inicio">
+
+    <label for="fim">Fim da indisponibilidade</label>
+    <input type="datetime-local" id="fim">
+
+    <button onclick="calcular()">Calcular desconto proporcional</button>
+
+    <div class="resultado" id="resultado" style="display:none;"></div>
+
+    <label for="explicacao">Explicação para envio ao cliente</label>
+    <textarea id="explicacao" style="width:100%;min-height:140px;padding:10px;border-radius:5px;border:1px solid #ccc;font-size:13px;" readonly></textarea>
+
+    <div class="obs">
+      ⚠️ Cálculo baseado em mês padrão de 30 dias (720 horas), prática usual do setor. O valor apresentado é referência de abatimento proporcional conforme RGC.
+    </div>
+  </div>
+
+  <script>
+    /*
+      ORIENTAÇÕES PARA USO INTERNO:
+      1) O valor mensal deve considerar apenas o serviço SCM (internet).
+         Produtos de combo como TV, streaming ou outros benefícios não devem
+         ser incluídos, pois não sofreram interrupção.
+      2) O cálculo é proporcional ao tempo de indisponibilidade efetivamente
+         comprovado (data e hora de início e fim).
+      3) Utiliza-se mês padrão de 30 dias (720 horas), prática aceita pela Anatel.
+      4) Esta ferramenta é de apoio ao atendimento e não substitui análise
+         técnica ou registro de protocolo.
+    */
+    function calcular() {
+      const valorPlano = parseFloat(document.getElementById('valorPlano').value);
+      const inicio = new Date(document.getElementById('inicio').value);
+      const fim = new Date(document.getElementById('fim').value);
+      const resultado = document.getElementById('resultado');
+
+      if (isNaN(valorPlano) || !inicio.getTime() || !fim.getTime() || fim <= inicio) {
+        resultado.style.display = 'block';
+        resultado.innerHTML = '❌ Preencha corretamente todos os campos.';
+        return;
+      }
+
+      const diffMs = fim - inicio;
+      const horasOff = diffMs / (1000 * 60 * 60);
+
+      const horasMes = 30 * 24; // 720 horas
+      const valorHora = valorPlano / horasMes;
+      const desconto = valorHora * horasOff;
+
+      resultado.style.display = 'block';
+      resultado.innerHTML = `
+        <p><strong>Valor do plano:</strong> R$ ${valorPlano.toFixed(2)}</p>
+        <p><strong>Tempo sem serviço:</strong> ${horasOff.toFixed(2)} horas</p>
+        <p><strong>Valor por hora:</strong> R$ ${valorHora.toFixed(4)}</p>
+        <p><strong>Desconto proporcional:</strong> R$ ${desconto.toFixed(2)}</p>
+      `;
+
+      const explicacao = `Conforme o Regulamento Geral de Direitos do Consumidor (RGC – Anatel), o cliente não pode ser cobrado pelo período em que o serviço de internet esteve indisponível.
+
+O cálculo considera o valor mensal do serviço de internet (SCM), rateado por um mês padrão de 30 dias (720 horas).
+
+No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-BR')}, houve ${horasOff.toFixed(2)} horas sem conexão, resultando em um desconto proporcional de R$ ${desconto.toFixed(2)}, que será aplicado como abatimento.`
+
+      document.getElementById('explicacao').value = explicacao;
+    }
+  </script>
+
+<style>
+  /* ===== CSS PARA USO NO GLIDE.APP ===== */
+  :root {
+    --primary: #d32f2f;
+    --primary-dark: #b71c1c;
+    --bg: #f4f6f8;
+    --card-bg: #ffffff;
+    --text-main: #333333;
+    --text-muted: #6f6f6f;
+    --border: #dddddd;
+    --radius: 12px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    padding: 12px;
+    color: var(--text-main);
+  }
+
+  .card {
+    width: 100%;
+    background: var(--card-bg);
+    padding: 16px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  h1 {
+    font-size: 18px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-muted);
+    margin: 6px 0;
+  }
+
+  label {
+    display: block;
+    margin-top: 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-size: 14px;
+    background: #fff;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  button:active {
+    background: var(--primary-dark);
+  }
+
+  .resultado {
+    margin-top: 16px;
+    background: #fafafa;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .resultado p {
+    margin: 4px 0;
+    color: var(--text-main);
+  }
+
+  .obs {
+    margin-top: 12px;
+    font-size: 11px;
+    color: #8a8a8a;
+    line-height: 1.4;
+  }
+</style>
+
+</body>
+</html>
