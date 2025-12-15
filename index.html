@@ -80,11 +80,11 @@
         <p><strong>Desconto proporcional:</strong> R$ ${desconto.toFixed(2)}</p>
       `;
 
-      const explicacao = `Conforme o Regulamento Geral de Direitos do Consumidor (RGC – Anatel), o cliente não pode ser cobrado pelo período em que o serviço de internet esteve indisponível.
+      const explicacao = `O desconto é calculado somente sobre o valor da internet, pois foi o serviço que ficou indisponível.
 
-O cálculo considera o valor mensal do serviço de internet (SCM), rateado por um mês padrão de 30 dias (720 horas).
+Os demais itens do plano (como aplicativos, TV ou outros benefícios do combo) continuaram funcionando normalmente e, por isso, não entram nesse cálculo.
 
-No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-BR')}, houve ${horasOff.toFixed(2)} horas sem conexão, resultando em um desconto proporcional de R$ ${desconto.toFixed(2)}, que será aplicado como abatimento.`
+Assim, consideramos apenas o período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-BR')}, totalizando ${horasOff.toFixed(2)} horas sem conexão, aplicando o desconto proporcional de R$ ${desconto.toFixed(2)} conforme as regras da Anatel.`
 
       document.getElementById('explicacao').value = explicacao;
     }
