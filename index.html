@@ -4,6 +4,7 @@
 <div style="background: linear-gradient(90deg, #dd3627, #c22227); padding: 20px; text-align: center;"><img alt="Logo Fastnet Telecom" src="https://lh3.googleusercontent.com/d/1uD19Ne-GTmhgBC0swzwyOSZ30mmmflCS" style="max-width: 150px; text-align: left;" /></div>
   <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Calculadora de Desconto Proporcional – RGC</title>
 </head>
 <body>
@@ -84,7 +85,7 @@ No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-B
   </script>
 
 <style>
-  /* ===== CSS PARA USO NO GLIDE.APP ===== */
+  /* ===== CSS PARA USO NO GLIDE.APP (RESPONSIVO) ===== */
   :root {
     --primary: #d32f2f;
     --primary-dark: #b71c1c;
@@ -108,8 +109,15 @@ No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-B
     color: var(--text-main);
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   .card {
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     background: var(--card-bg);
     padding: 16px;
     border-radius: var(--radius);
@@ -140,7 +148,7 @@ No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-B
   textarea {
     width: 100%;
     margin-top: 6px;
-    padding: 10px 12px;
+    padding: 12px;
     border-radius: 10px;
     border: 1px solid var(--border);
     font-size: 14px;
@@ -156,7 +164,7 @@ No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-B
   button {
     margin-top: 18px;
     width: 100%;
-    padding: 14px;
+    padding: 16px;
     background: var(--primary);
     color: #ffffff;
     border: none;
@@ -189,6 +197,25 @@ No período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-B
     font-size: 11px;
     color: #8a8a8a;
     line-height: 1.4;
+  }
+
+  /* ===== AJUSTES PARA TELAS MAIORES ===== */
+  @media (min-width: 768px) {
+    body {
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    p, label {
+      font-size: 14px;
+    }
+
+    button {
+      font-size: 16px;
+    }
   }
 </style>
 
