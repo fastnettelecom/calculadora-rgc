@@ -21,10 +21,10 @@
     <p style="font-size:12px;color:#777;margin-top:5px;">ℹ️ Informe apenas o valor referente ao serviço de internet (SCM) descrito no contrato. Em planos combo, outros produtos (TV, apps, benefícios) não entram no cálculo, pois permaneceram disponíveis.</p>
 
     <label for="inicio">Início da indisponibilidade</label>
-    <input type="datetime-local" id="inicio">
+    <input type="datetime-local" id="inicio" step="1">
 
     <label for="fim">Fim da indisponibilidade</label>
-    <input type="datetime-local" id="fim">
+    <input type="datetime-local" id="fim" step="1">
 
     <button onclick="calcular()">Calcular desconto proporcional</button>
 
@@ -63,7 +63,10 @@
       }
 
       const diffMs = fim - inicio;
-      const horasOff = diffMs / (1000 * 60 * 60);
+
+      // considera horas + minutos + segundos
+      const segundosOff = diffMs / 1000;
+      const horasOff = segundosOff / 3600;
 
       const horasMes = 30 * 24; // 720 horas
       const valorHora = valorPlano / horasMes;
