@@ -18,7 +18,7 @@
 
     <label for="valorPlano">Valor mensal do plano (R$)</label>
     <input type="number" id="valorPlano" placeholder="Ex: 120" step="0.01">
-    <p style="font-size:12px;color:#777;margin-top:5px;">ℹ️ Informe apenas o valor referente ao serviço de internet (SCM) descrito no contrato. Em planos combo, outros produtos (TV, apps, benefícios) não entram no cálculo, pois permaneceram disponíveis.</p>
+    <p style="font-size:12px;color:#777;margin-top:5px;">ℹ️ Informe apenas o valor referente ao serviço de internet (SCM) descrito no contrato. Em planos combo, outros produtos (TV, apps, vantagens) não entram no cálculo, pois permaneceram disponíveis.</p>
 
     <label for="inicio">Início da indisponibilidade</label>
     <input type="datetime-local" id="inicio" step="1">
@@ -42,7 +42,7 @@
     /*
       ORIENTAÇÕES PARA USO INTERNO:
       1) O valor mensal deve considerar apenas o serviço SCM (internet).
-         Produtos de combo como TV, streaming ou outros benefícios não devem
+         Produtos de combo como TV, streaming ou outras vantagens não devem
          ser incluídos, pois não sofreram interrupção.
       2) O cálculo é proporcional ao tempo de indisponibilidade efetivamente
          comprovado (data e hora de início e fim).
@@ -82,7 +82,7 @@
 
       const explicacao = `O desconto é calculado somente sobre o valor da internet, pois foi o serviço que ficou indisponível.
 
-Os demais itens do plano (como aplicativos, TV ou outros benefícios do combo) continuaram funcionando normalmente e, por isso, não entram nesse cálculo.
+Os demais itens do plano (como aplicativos, TV ou outras vantagens do combo) continuaram funcionando normalmente e, por isso, não entram nesse cálculo.
 
 Assim, consideramos apenas o período entre ${inicio.toLocaleString('pt-BR')} e ${fim.toLocaleString('pt-BR')}, totalizando ${horasOff.toFixed(2)} horas sem conexão, aplicando o desconto proporcional de R$ ${desconto.toFixed(2)} conforme as regras da Anatel.`
 
